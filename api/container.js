@@ -9,6 +9,14 @@ const config = require('../config/environments/index');
 // controllers
 const { UserController } = require('./controllers');
 
+// services
+const { UserService } = require('../services');
+
+// repositories
+const { UserRepository } = require('../dal/repositories');
+
+const db = require('../dal/entities');
+
 // routes
 const Routes = require('./routes/index');
 const userRoutes = require('./routes/user.routes');
@@ -23,11 +31,23 @@ container.register({
 });
 
 container.register({
-  UserController: asClass(UserController.bind(UserController)).singleton(),
+  UserController: asClass(UserController).singleton(),
 });
 
 container.register({
   UserRoutes: asFunction(userRoutes).singleton(),
+});
+
+container.register({
+  UserService: asClass(UserService).singleton(),
+});
+
+container.register({
+  UserRepository: asClass(UserRepository).singleton(),
+});
+
+container.register({
+  db: asValue(db),
 });
 
 module.exports = container;
