@@ -4,4 +4,5 @@ module.exports = {
   CourseRepository: require('./course.repository'),
   SectionRepository: require('./section.repository'),
   RegistrationRepository: require('./registration.repository'),
+  SubjectRepository: require('./subject.repository'),
 };
