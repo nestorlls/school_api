@@ -24,4 +24,19 @@ module.exports = function (sequelize, DataTypes) {
       tableName: 'user',
     }
   );
+
+  User.associate = (models) => {
+    User.belongsTo(models.classrooms, {
+      foreignKey: 'classroom_id',
+      as: 'classroom',
+    });
+
+    User.belongsToMany(models.courses, {
+      through: 'user_courses',
+      foreignKey: 'id',
+      as: 'courses',
+    });
+  };
+
+  return User;
 };
