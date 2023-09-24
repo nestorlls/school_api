@@ -6,9 +6,12 @@ const db = container.resolve('db');
 app
   .start()
   .then(async () => {
-    console.log('app started');
+    const response = await db.sequelize.sync();
 
-    await db.sequelize.sync();
+    if (response) {
+      console.log('db synced');
+      console.log('app started');
+    }
   })
   .catch((err) => {
     console.log(err);
